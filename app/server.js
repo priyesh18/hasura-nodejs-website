@@ -27,13 +27,15 @@ app.get('/', function (req, res) {
     method: 'POST',
     headers,
     body: JSON.stringify({
-            type: 'select',
-            args: {
-                table: 'topic',
-                columns: ['*'],
-
-            }
-        })
+      type: 'select',
+      args: {
+        table: {
+          schema: 'hdb_catalog',
+          name: 'hdb_table'
+        },
+        columns: ['*.*'],
+        where: { table_schema: 'public' }
+    }})
   };
   fetch(schemaFetchUrl, options)
     .then(
