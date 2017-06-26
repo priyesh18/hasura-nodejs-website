@@ -150,7 +150,7 @@ app.get('/', function(req, res) {
 
 
 app.get('/signup', function(req, res) {
-
+  res.render('signup-page');
 });
 
 app.post('/signup', function(req, res) {
