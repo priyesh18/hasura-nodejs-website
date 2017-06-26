@@ -1,0 +1,15 @@
+{
+  "name": "hasura-app",
+  "version": "1.0.0",
+  "description": "Demo to show git push build and deploy",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "priyesh patel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "node-fetch": "^1.6.3"
+  },
+  "main": "server.js"
+}
