@@ -100,7 +100,10 @@ var dataurl = "http://data.c100.hasura.me";
 var authurl = "http://auth.c100.hasura.me";
 var headers = { 'Content-Type': 'application/json' };
 //Routes
-app.get('/', function(req, res) {
+app.get('/',function(req,res) {
+    res.redirect("/topics");
+});
+app.get('/topics', function(req, res) {
     var schemaFetchUrl = dataurl + '/v1/query';
     var options = {
         method: 'POST',
@@ -147,7 +150,12 @@ app.get('/', function(req, res) {
         });*/
 });
 
-
+app.get('/resource',function(req,res) {
+    res.render('resourceform');
+});
+app.post('/resource',function(req,res) {
+    //req.body.resource
+});
 
 app.get('/signup', function(req, res) {
   res.render('signup-page');
