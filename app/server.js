@@ -159,12 +159,12 @@ app.get('/topics', function (req, res) {
 //Second screen
 app.get('/topics/:id', function (req, res) {
     //console.log(req.params.id);
-    res.send("show page for " + req.params.id);
+    res.render('resources', {topic: req.params.id});
 });
 
 
-app.get('/resource', function (req, res) {
-    res.render('resourceform');
+app.get('/resource/:topic', function (req, res) {
+    res.render('resourceform',{topic: req.params.topic});
 });
 app.post('/resource', function (req, res) {
     //req.body.resource

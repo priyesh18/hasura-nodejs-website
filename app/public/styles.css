@@ -3,6 +3,7 @@
     	font-size: 32px;
     	padding: 24px;
     }
+    
 }
 
 
@@ -11,7 +12,7 @@
     color: black;
 }
 .navbar-nav > .active {
-    background-color: #00007F;
+    background-color: #55007F;
     border-radius: 4px;
     color: #FFFFFF;
     box-shadow: 0 16px 26px -10px rgba(156, 39, 176, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2);
@@ -20,10 +21,6 @@
 
 .signup-page .wrapper .card-signup {
     margin: 80px 0 20px;
-}
-input.form-control.long-input {
-	width: 180%;
-
 }
 
 a:visited {
