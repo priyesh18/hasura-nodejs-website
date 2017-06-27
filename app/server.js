@@ -96,7 +96,7 @@ app.set("view engine", "ejs"); //so that I don't have to write .ejs again and ag
 app.use(express.static("public")); //serve the contents of my public directory
 app.use(bodyParser.urlencoded({ extended: true }));
 //Vars
-var dataurl = "http://data.c100.hasura.me";
+var dataurl = "http://data.c100.hasura.me/v1/query";
 var authurl = "http://auth.c100.hasura.me";
 var headers = { 'Content-Type': 'application/json' };
 //Routes
@@ -104,7 +104,8 @@ app.get('/',function(req,res) {
     res.redirect("/topics");
 });
 app.get('/topics', function(req, res) {
-    var schemaFetchUrl = dataurl + '/v1/query';
+   // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
+    var schemaFetchUrl = dataurl;
     var options = {
         method: 'POST',
         headers,
@@ -162,7 +163,49 @@ app.get('/signup', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
+  var newuser=req.body.user;
+    var schemaFetchUrl = authurl + '/signup';
+    var options = {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+              username: newuser['username'],
+              password:newuser['pass'],
+              email: newuser['email']
+        })
+    };
+    fetch(schemaFetchUrl, options)
+      .then(function(res) {
+        return res.json();
+    }).then(function(json) {
+        console.log(json);
+       // res.redirect("/");
+       headers.Authorization = 'Bearer ' + json['auth_token'];
+       var options2 = {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          type:'insert',
+          args:{
+            table:'profile',
+            objects:[
+              {
+                'name':newuser['username'],
+                'user_id':json['hasura_id']
+              }
+            ]
+          }
+        })
+       };
+       fetch(dataurl,options2)
+        .then(function(res2){
+          return res2.json();
+        }).then(function(json2){
+          console.log(json2);
+        })
 
+    });
+ // console.log(newuser['username']);
 });
 
 app.get('/login', function(req, res) {
@@ -173,6 +216,17 @@ app.post('/login', function(req, res) {
 
 });
 
+app.post('/logout', function(req, res) {
+  var schemaFetchUrl = authurl + '/user/logout';
+  fetch(schemaFetchUrl)
+      .then(function(res) {
+        return res.json();
+    }).then(function(json) {
+        console.log(json);
+        res.redirect("/");
+    });
+
+});
 
 
 app.listen(8080, function() {
