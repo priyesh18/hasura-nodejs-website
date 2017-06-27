@@ -94,17 +94,21 @@ var fetch = require('node-fetch');
 
 app.set("view engine", "ejs"); //so that I don't have to write .ejs again and again
 app.use(express.static("public")); //serve the contents of my public directory
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 //Vars
 var dataurl = "http://data.c100.hasura.me/v1/query";
 var authurl = "http://auth.c100.hasura.me";
-var headers = { 'Content-Type': 'application/json' };
+var headers = {
+    'Content-Type': 'application/json'
+};
 //Routes
-app.get('/',function(req,res) {
+app.get('/', function (req, res) {
     res.redirect("/topics");
 });
-app.get('/topics', function(req, res) {
-   // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
+app.get('/topics', function (req, res) {
+    // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
     var schemaFetchUrl = dataurl;
     var options = {
         method: 'POST',
@@ -119,116 +123,124 @@ app.get('/topics', function(req, res) {
         })
     };
     fetch(schemaFetchUrl, options)
-      .then(function(res) {
-        return res.json();
-    }).then(function(json) {
-        res.render("home",{data:json});
-    });
-        /*.then(
-            (response) => {
-                response.text()
-                    .then(
-                        (body) => {
-                            var data = JSON.parse(body);
-                            res.render("home", { data: data });
-                            
-                        },
-                        (e) => {
-                            res.send('Error in fetching current schema: ' + err.toString());
-                        })
-                    .catch((e) => {
-                        e.stack();
-                        res.send('Error in fetching current schema: ' + e.toString());
-                    });
-            },
-            (e) => {
-                console.error(e);
-                res.send('Error in fetching current schema: ' + e.toString());
-            })
-        .catch((e) => {
-            e.stackTrace();
+        .then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            res.render("home", {
+                data: json
+            });
+        });
+    /*.then(
+        (response) => {
+            response.text()
+                .then(
+                    (body) => {
+                        var data = JSON.parse(body);
+                        res.render("home", { data: data });
+                        
+                    },
+                    (e) => {
+                        res.send('Error in fetching current schema: ' + err.toString());
+                    })
+                .catch((e) => {
+                    e.stack();
+                    res.send('Error in fetching current schema: ' + e.toString());
+                });
+        },
+        (e) => {
+            console.error(e);
             res.send('Error in fetching current schema: ' + e.toString());
-        });*/
+        })
+    .catch((e) => {
+        e.stackTrace();
+        res.send('Error in fetching current schema: ' + e.toString());
+    });*/
+});
+//Second screen
+app.get('/topics/:id', function (req, res) {
+    //console.log(req.params.id);
+    res.send("show page for " + req.params.id);
 });
 
-app.get('/resource',function(req,res) {
+
+app.get('/resource', function (req, res) {
     res.render('resourceform');
 });
-app.post('/resource',function(req,res) {
+app.post('/resource', function (req, res) {
     //req.body.resource
 });
 
-app.get('/signup', function(req, res) {
-  res.render('signup-page');
+app.get('/signup', function (req, res) {
+    res.render('signup-page');
 });
 
-app.post('/signup', function(req, res) {
-  var newuser=req.body.user;
+app.post('/signup', function (req, res) {
+    var newuser = req.body.user;
     var schemaFetchUrl = authurl + '/signup';
     var options = {
         method: 'POST',
         headers,
         body: JSON.stringify({
-              username: newuser['username'],
-              password:newuser['pass'],
-              email: newuser['email']
+            username: newuser['username'],
+            password: newuser['pass'],
+            email: newuser['email']
         })
     };
     fetch(schemaFetchUrl, options)
-      .then(function(res) {
-        return res.json();
-    }).then(function(json) {
-        console.log(json);
-       // res.redirect("/");
-       headers.Authorization = 'Bearer ' + json['auth_token'];
-       var options2 = {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({
-          type:'insert',
-          args:{
-            table:'profile',
-            objects:[
-              {
-                'name':newuser['username'],
-                'user_id':json['hasura_id']
+        .then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            console.log(json);
+            // res.redirect("/");
+            headers.Authorization = 'Bearer ' + json['auth_token'];
+            var options2 = {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                    type: 'insert',
+                    args: {
+                        table: 'profile',
+                        objects: [
+                            {
+                                'name': newuser['username'],
+                                'user_id': json['hasura_id']
               }
             ]
-          }
-        })
-       };
-       fetch(dataurl,options2)
-        .then(function(res2){
-          return res2.json();
-        }).then(function(json2){
-          console.log(json2);
-        })
+                    }
+                })
+            };
+            fetch(dataurl, options2)
+                .then(function (res2) {
+                    return res2.json();
+                }).then(function (json2) {
+                    console.log(json2);
+                })
 
-    });
- // console.log(newuser['username']);
+        });
+    // console.log(newuser['username']);
 });
 
-app.get('/login', function(req, res) {
-
-});
-
-app.post('/login', function(req, res) {
+app.get('/login', function (req, res) {
 
 });
 
-app.post('/logout', function(req, res) {
-  var schemaFetchUrl = authurl + '/user/logout';
-  fetch(schemaFetchUrl)
-      .then(function(res) {
-        return res.json();
-    }).then(function(json) {
-        console.log(json);
-        res.redirect("/");
-    });
+app.post('/login', function (req, res) {
+
+});
+
+app.post('/logout', function (req, res) {
+    var schemaFetchUrl = authurl + '/user/logout';
+    fetch(schemaFetchUrl)
+        .then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            console.log(json);
+            res.redirect("/");
+        });
 
 });
 
 
-app.listen(8080, function() {
+app.listen(8080, function () {
     console.log("listening on port 8080");
 });

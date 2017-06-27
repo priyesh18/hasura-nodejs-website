@@ -1,3 +1,11 @@
+@media screen and (min-width: 632px) {
+    .main-topic{
+    	font-size: 32px;
+    	padding: 24px;
+    }
+}
+
+
 .navbar.nav-white {
     background-color: white;
     color: black;
@@ -16,4 +24,11 @@
 input.form-control.long-input {
 	width: 180%;
 
+}
+
+a:visited {
+	color: black;
+}
+a:hover {
+	text-decoration: none;
 }

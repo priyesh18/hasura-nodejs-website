@@ -1,9 +1,32 @@
 <%include partials/header%>
 
-<div class="jumbotron"></div>
-<% data.forEach(function(topics) { %>
-	<li><%= topics["topic_name"]%></li>
-	<% })%>
+    <div class="jumbotron"></div>
+    <div class="container">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
+    </div>
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-3 col-md-2 col-sm-0"></div>
+    <div class="col-lg-6 col-md-8 col-sm-12"> 
+        <ul class="list-group">
+            <% data.forEach(function(topics) { %>
 
 
-<%include partials/footer%>
+                <a href="/topics/<%=topics["topic_name"]%>">
+                    <li class="card list-group-item main-topic">
+                        <%= topics["topic_name"]%>
+                    </li>
+                </a>
+
+                <% })%>
+        </ul>
+        </div>
+      <div class="col-lg-3 col-md-2 col-sm-0"></div>  
+    </div>
+</div>
+    <%include partials/footer%>
