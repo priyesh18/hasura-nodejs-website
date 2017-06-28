@@ -109,6 +109,9 @@ app.get('/', function(req, res) {
 });
 app.get('/topics', function(req, res) {
     // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
+    var headers = {
+    'Content-Type': 'application/json'
+    };
     var schemaFetchUrl = dataurl;
     var options = {
         method: 'POST',
@@ -124,10 +127,11 @@ app.get('/topics', function(req, res) {
     };
     fetch(schemaFetchUrl, options)
         .then(function(res) {
+          //console.log("response for /topics "+res);
             return res.json();
         }).then(function(json) {
             //console.log(json);
-            res.render("home", {
+            res.render("home",{
                 data:json
             });
         });
@@ -289,7 +293,8 @@ app.post('/logout', function(req, res) {
             return res.json();
         }).then(function(json) {
             console.log(json);
-           // headers['X-Hasura-User-Id']=null;
+
+            headers['X-Hasura-User-Id']=null;
             
             
         })
