@@ -286,14 +286,13 @@ app.post('/logout', function(req, res) {
       }
     fetch(schemaFetchUrl, options)
         .then(function(res) {
-
             return res.json();
         }).then(function(json) {
             console.log(json);
-            headers['X-Hasura-User-Id']=null;
-            console.log(headers);
+           // headers['X-Hasura-User-Id']=null;
             
-        });
+            
+        })
         
         res.redirect("/");
 
