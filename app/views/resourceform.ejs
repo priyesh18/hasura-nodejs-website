@@ -12,38 +12,41 @@
 <div class="col-md-6 col-lg-6 ">
 <form action="/resource" method="POST" class="form ">
 	<div class="input-group">
-      <input type="text" class="form-control" placeholder="Name">
+      <input type="text" name="name" class="form-control" placeholder="Name">
       <span class="input-group-btn">
       </span>
     </div>
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="URL">
+      <input type="text" name="r_url" class="form-control" placeholder="URL">
       <span class="input-group-btn">
       </span>
     </div>
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Description">
+      <input type="text" name="desc" class="form-control" placeholder="Description">
       <span class="input-group-btn">
       </span>
     </div>
     <div class="row">
     	<div class="col-lg-6 col-md-6">
+    		<div class="input-group">
+		      <input type="text" name="topic" class="form-control" value="<%=topic%>" style="display:none">
+		    </div>
 
     		<div class="radio">
 				<label>
-					<input type="radio" name="optionsRadios">
+					<input type="radio" name="type" value="video">
 					Video
 				</label>
 			</div>
 			<div class="radio">
 				<label>
-					<input type="radio" name="optionsRadios" checked="true">
+					<input type="radio" name="type" value="book" checked="true">
 					Book
 				</label>
 			</div>
 			<div class="radio">
 				<label>
-					<input type="radio" name="optionsRadios">
+					<input type="radio" name="type" value="blog">
 					Blog
 				</label>
 			</div>
@@ -52,20 +55,20 @@
     	<hr>
     		<div class="checkbox">
 				<label>
-					<input type="checkbox" name="optionsCheckboxes" checked>
+					<input type="checkbox" name="cert" value="1" >
 					Certification Available
 				</label>
 			</div>
 			<hr>
     		<div class="radio">
 				<label>
-					<input type="radio" name="paid" checked="true">
+					<input type="radio" name="paid" value="1" checked="true">
 					Paid
 				</label>
 			</div>
 			<div class="radio">
 				<label>
-					<input type="radio" name="paid">
+					<input type="radio" name="paid" value="0">
 					Free
 				</label>
 			</div>

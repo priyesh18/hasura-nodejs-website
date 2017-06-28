@@ -88,8 +88,8 @@ app.listen(8080, function () {
 */
 var express = require("express"),
     bodyParser = require("body-parser"), //get the params from the request body
-    app = express();
-var fetch = require('node-fetch');
+    app = express(),
+    fetch = require('node-fetch');
 
 
 app.set("view engine", "ejs"); //so that I don't have to write .ejs again and again
@@ -104,10 +104,10 @@ var headers = {
     'Content-Type': 'application/json'
 };
 //Routes
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
     res.redirect("/topics");
 });
-app.get('/topics', function (req, res) {
+app.get('/topics', function(req, res) {
     // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
     var schemaFetchUrl = dataurl;
     var options = {
@@ -123,11 +123,12 @@ app.get('/topics', function (req, res) {
         })
     };
     fetch(schemaFetchUrl, options)
-        .then(function (res) {
+        .then(function(res) {
             return res.json();
-        }).then(function (json) {
+        }).then(function(json) {
+            //console.log(json);
             res.render("home", {
-                data: json
+                data:json
             });
         });
     /*.then(
@@ -157,24 +158,52 @@ app.get('/topics', function (req, res) {
     });*/
 });
 //Second screen
-app.get('/topics/:id', function (req, res) {
+app.get('/topics/:id', function(req, res) {
     //console.log(req.params.id);
-    res.render('resources', {topic: req.params.id});
+    res.render('resources', { topic: req.params.id });
 });
 
 
-app.get('/resource/:topic', function (req, res) {
-    res.render('resourceform',{topic: req.params.topic});
+app.get('/resource/:topic', function(req, res) {
+    res.render('resourceform', { topic: req.params.topic });
 });
-app.post('/resource', function (req, res) {
-    //req.body.resource
+app.post('/resource', function(req, res) {
+    var certificate = (req.body.cert == '1') ? true : false;
+    var price = (req.body.paid == '1') ? true : false;
+        
+    var options = {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            type: 'insert',
+            args: {
+                table: 'resource',
+                objects: [{
+                    resource_url: req.body.r_url,
+                    name: req.body.name,
+                    topic: req.body.topic,
+                    user_id: headers['X-Hasura-User-Id'],
+                    type: req.body.type,
+                    certificate: certificate,
+                    cost: price
+                }]
+            }
+        })
+    }
+    fetch(dataurl, options)
+                .then(function(res) {
+                    return res.json();
+                }).then(function(json) {
+                    console.log(json);
+                })
+    res.redirect("/");
 });
 
-app.get('/signup', function (req, res) {
+app.get('/signup', function(req, res) {
     res.render('signup-page');
 });
 
-app.post('/signup', function (req, res) {
+app.post('/signup', function(req, res) {
     var newuser = req.body.user;
     var schemaFetchUrl = authurl + '/signup';
     var options = {
@@ -187,11 +216,11 @@ app.post('/signup', function (req, res) {
         })
     };
     fetch(schemaFetchUrl, options)
-        .then(function (res) {
+        .then(function(res) {
             return res.json();
-        }).then(function (json) {
+        }).then(function(json) {
             console.log(json);
-            // res.redirect("/");
+            // 
             headers.Authorization = 'Bearer ' + json['auth_token'];
             var options2 = {
                 method: 'POST',
@@ -200,47 +229,77 @@ app.post('/signup', function (req, res) {
                     type: 'insert',
                     args: {
                         table: 'profile',
-                        objects: [
-                            {
-                                'name': newuser['username'],
-                                'user_id': json['hasura_id']
-              }
-            ]
+                        objects: [{
+                            'name': newuser['username'],
+                            'user_id': json['hasura_id']
+                        }]
                     }
                 })
             };
             fetch(dataurl, options2)
-                .then(function (res2) {
+                .then(function(res2) {
                     return res2.json();
-                }).then(function (json2) {
+                }).then(function(json2) {
                     console.log(json2);
                 })
+                res.redirect("/");
 
         });
     // console.log(newuser['username']);
 });
 
-app.get('/login', function (req, res) {
-
+app.get('/login', function(req, res) {
+  res.render('login');
 });
 
-app.post('/login', function (req, res) {
-
-});
-
-app.post('/logout', function (req, res) {
-    var schemaFetchUrl = authurl + '/user/logout';
-    fetch(schemaFetchUrl)
-        .then(function (res) {
+app.post('/login', function(req, res) {
+  var newuser = req.body.user;
+    var schemaFetchUrl = authurl + '/login';
+    var options = {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            username: newuser['username'],
+            password: newuser['pass']
+        })
+    };
+    fetch(schemaFetchUrl, options)
+        .then(function(res) {
             return res.json();
-        }).then(function (json) {
+        }).then(function(json) {
+          console.log(json);
+          headers.Authorization = 'Bearer ' + json['auth_token'];
+          headers['X-Hasura-User-Id'] = json['hasura_id'];
+          console.log(headers['X-Hasura-User-Id']);
+          
+          })
+        
+        res.redirect("/");
+});
+
+app.post('/logout', function(req, res) {
+
+    var schemaFetchUrl = authurl + '/user/logout';
+    var options = {
+        method: 'POST',
+        headers
+      }
+    fetch(schemaFetchUrl, options)
+        .then(function(res) {
+
+            return res.json();
+        }).then(function(json) {
             console.log(json);
-            res.redirect("/");
+            headers['X-Hasura-User-Id']=null;
+            console.log(headers);
+            
         });
+        
+        res.redirect("/");
 
 });
 
 
-app.listen(8080, function () {
+app.listen(8080, function() {
     console.log("listening on port 8080");
 });
