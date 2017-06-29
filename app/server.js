@@ -246,9 +246,10 @@ app.post('/signup', function(req, res) {
                 }).then(function(json2) {
                     console.log(json2);
                 })
-                res.redirect("/");
+                
 
         });
+        res.redirect("/");
     // console.log(newuser['username']);
 });
 
@@ -269,12 +270,14 @@ app.post('/login', function(req, res) {
     };
     fetch(schemaFetchUrl, options)
         .then(function(res) {
+            console.log(res.status);
             return res.json();
         }).then(function(json) {
           console.log(json);
           headers.Authorization = 'Bearer ' + json['auth_token'];
           headers['X-Hasura-User-Id'] = json['hasura_id'];
-          console.log(headers['X-Hasura-User-Id']);
+          headers['X-Hasura-Role'] = json['hasura_roles'][0];
+          console.log(headers);
           
           })
         
@@ -293,8 +296,9 @@ app.post('/logout', function(req, res) {
             return res.json();
         }).then(function(json) {
             console.log(json);
-
+            headers['X-Hasura-Role'] = 'anonymous';
             headers['X-Hasura-User-Id']=null;
+            console.log(headers);
             
             
         })
