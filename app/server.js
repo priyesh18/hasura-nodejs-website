@@ -212,7 +212,9 @@ app.post('/signup', function(req, res) {
     var schemaFetchUrl = authurl + '/signup';
     var options = {
         method: 'POST',
-        headers,
+        headers: {
+           'Content-Type': 'application/json'
+          },
         body: JSON.stringify({
             username: newuser['username'],
             password: newuser['pass'],
@@ -262,7 +264,9 @@ app.post('/login', function(req, res) {
     var schemaFetchUrl = authurl + '/login';
     var options = {
         method: 'POST',
-        headers,
+        headers: {
+           'Content-Type': 'application/json'
+          },
         body: JSON.stringify({
             username: newuser['username'],
             password: newuser['pass']
