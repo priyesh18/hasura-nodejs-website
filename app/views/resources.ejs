@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Engineering Assistant</a>
+                <a class="navbar-brand" href="/">Engineering Assistant</a>
             </div>
             <div class=" collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -25,29 +25,46 @@
         </div>
     </nav>
     <div class="container">
-        <h1>Resources for <%=topic%></h1>
-        <p>Resource name<span class="pull-right"><a href="/resource/<%=topic%>"><button class="btn btn-primary">Add a resource</button></a></span></p>
+        <h1>Resources for <%=data[0]["topic"]%></h1>
+        <p>Resource name<span class="pull-right"><a href="/resource/<%=data[0]["topic"]%>"><button class="btn btn-primary">Add a resource</button></a></span></p>
         <hr>
         <hr>
     </div>
+    <% data.forEach(function(res) { %>
     <div class="container">
         <div class="card">
             <div class="row">
                 <a href="#resource_url">
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                        <h3>Android development<br>
-	                        <small>Description<br><small>submitted by Batman</small>
+                        <h3><%=res["name"]%><br>
+	                        <small><%=res["description"]%><br><!--<small>submitted by Batman</small>-->
 	                        </small>
                         </h3>
                     </div>
                 </a>
                 <div class="col-lg-1 col-md-1 col-sm-9 col-xs-9">
-                    <i class="details fa fa-video-camera" aria-hidden="true"></i>
+                	<%if(res["type"]=="video"){%>
+                    	<i class="details fa fa-video-camera" aria-hidden="true"></i>
+                    <%}%>
+                    <%if(res["type"]=="book"){%>
+                    	<i class="details fa fa-book" aria-hidden="true"></i>
+                    <%}%>
+                    <%if(res["type"]=="blog"){%>
+                    	<i class="details fa fa-rss-square" aria-hidden="true"></i>
+                    <%}%>
                     <span class="details">
-                    <font color="green"> free
-                    </font>
+                    <%if(res["cost"]){%>
+	                    <font color="red"><small>Paid</small>
+	                    </font>
+	                    <%}%>
+	                 <%if(!res["cost"]) {%>
+	                    <font color="green"><small>free</small>
+	                    </font>
+	                    <%}%>   
                     </span>
+                    <%if(res["certificate"]){%>
                     <i class="details fa fa-certificate" aria-hidden="true"></i>
+                    <%}%>
                 </div>
                 <div class="row vertical-align col-lg-2 col-md-2 col-sm-3 col-xs-3">
                     <div class="col-xs-6">
@@ -55,14 +72,14 @@
                         <i id="thumb_down" class="material-icons">thumb_down</i>
                     </div>
                     <div class="col-xs-6">
-                        <span id="votes">10</span>
+                    	<%if(res["total_votes"]==null){res["total_votes"]=0}%>
+                        <span id="votes"><%=res["total_votes"]%></span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="card">
-                <h3>Android development</h3><i class="fa fa-video-camera" aria-hidden="true"></i>
-            </div>
-        </div>
+    </div>
+    <%})%>
+
+
         <%include partials/footer%>

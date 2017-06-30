@@ -110,7 +110,7 @@ app.get('/', function(req, res) {
 app.get('/topics', function(req, res) {
     // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
     var headers = {
-    'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
     };
     var schemaFetchUrl = dataurl;
     var options = {
@@ -127,12 +127,12 @@ app.get('/topics', function(req, res) {
     };
     fetch(schemaFetchUrl, options)
         .then(function(res) {
-          //console.log("response for /topics "+res);
+            //console.log("response for /topics "+res);
             return res.json();
         }).then(function(json) {
             //console.log(json);
-            res.render("home",{
-                data:json
+            res.render("home", {
+                data: json
             });
         });
     /*.then(
@@ -162,9 +162,41 @@ app.get('/topics', function(req, res) {
     });*/
 });
 //Second screen
-app.get('/topics/:id', function(req, res) {
+app.get('/topics/:id', function(req, res) {   //main page 
     //console.log(req.params.id);
-    res.render('resources', { topic: req.params.id });
+    var schemaFetchUrl = dataurl;
+    var options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            type: "select",
+            args: {
+                table: 'resource_info',
+                columns: ['*'],
+                where: {
+                  topic: req.params.id
+                },
+                order_by: {
+                    column: 'total_votes',
+                    order: 'asc'
+
+                }
+            }
+        })
+    };
+    fetch(schemaFetchUrl, options)
+        .then(function(res) {
+            //console.log("response for /topics "+res);
+            return res.json();
+        }).then(function(json) {
+            console.log(json);
+            res.render("resources", {
+                data: json
+            });
+        });
+
 });
 
 
@@ -174,7 +206,7 @@ app.get('/resource/:topic', function(req, res) {
 app.post('/resource', function(req, res) {
     var certificate = (req.body.cert == '1') ? true : false;
     var price = (req.body.paid == '1') ? true : false;
-        
+
     var options = {
         method: 'POST',
         headers,
@@ -195,11 +227,11 @@ app.post('/resource', function(req, res) {
         })
     }
     fetch(dataurl, options)
-                .then(function(res) {
-                    return res.json();
-                }).then(function(json) {
-                    console.log(json);
-                })
+        .then(function(res) {
+            return res.json();
+        }).then(function(json) {
+            console.log(json);
+        })
     res.redirect("/");
 });
 
@@ -213,8 +245,8 @@ app.post('/signup', function(req, res) {
     var options = {
         method: 'POST',
         headers: {
-           'Content-Type': 'application/json'
-          },
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
             username: newuser['username'],
             password: newuser['pass'],
@@ -248,25 +280,25 @@ app.post('/signup', function(req, res) {
                 }).then(function(json2) {
                     console.log(json2);
                 })
-                
+
 
         });
-        res.redirect("/");
+    res.redirect("/");
     // console.log(newuser['username']);
 });
 
 app.get('/login', function(req, res) {
-  res.render('login');
+    res.render('login');
 });
 
 app.post('/login', function(req, res) {
-  var newuser = req.body.user;
+    var newuser = req.body.user;
     var schemaFetchUrl = authurl + '/login';
     var options = {
         method: 'POST',
         headers: {
-           'Content-Type': 'application/json'
-          },
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
             username: newuser['username'],
             password: newuser['pass']
@@ -277,15 +309,15 @@ app.post('/login', function(req, res) {
             console.log(res.status);
             return res.json();
         }).then(function(json) {
-          console.log(json);
-          headers.Authorization = 'Bearer ' + json['auth_token'];
-          headers['X-Hasura-User-Id'] = json['hasura_id'];
-          headers['X-Hasura-Role'] = json['hasura_roles'][0];
-          console.log(headers);
-          
-          })
-        
-        res.redirect("/");
+            console.log(json);
+            headers.Authorization = 'Bearer ' + json['auth_token'];
+            headers['X-Hasura-User-Id'] = json['hasura_id'];
+            headers['X-Hasura-Role'] = json['hasura_roles'][0];
+            console.log(headers);
+
+        })
+
+    res.redirect("/");
 });
 
 app.post('/logout', function(req, res) {
@@ -294,20 +326,20 @@ app.post('/logout', function(req, res) {
     var options = {
         method: 'POST',
         headers
-      }
+    }
     fetch(schemaFetchUrl, options)
         .then(function(res) {
             return res.json();
         }).then(function(json) {
             console.log(json);
             headers['X-Hasura-Role'] = 'anonymous';
-            headers['X-Hasura-User-Id']=null;
+            headers['X-Hasura-User-Id'] = null;
             console.log(headers);
-            
-            
+
+
         })
-        
-        res.redirect("/");
+
+    res.redirect("/");
 
 });
 
