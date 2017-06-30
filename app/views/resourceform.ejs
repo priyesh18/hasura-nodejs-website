@@ -1,92 +1,76 @@
 <%include partials/header%>
-<div class="container">
-<div>
-	<h1>Add a new resource for <%=topic.toUpperCase();%></h1>
-	<h4>Submit a resource you found useful and is not listed.</h4>
-</div>
-</div>
-
-<div class="container main ">
-<div class="row"></div>
-<div class="col-lg-3 col-md-3"></div>
-<div class="col-md-6 col-lg-6 ">
-<form action="/resource" method="POST" class="form ">
-	<div class="input-group">
-      <input type="text" name="name" class="form-control" placeholder="Name">
-      <span class="input-group-btn">
+    <div class="container">
+        <div>
+            <h1>Add a new resource for <%=topic.toUpperCase();%></h1>
+            <h4>Submit a resource you found useful and is not listed.</h4>
+        </div>
+    </div>
+    <div class="container main ">
+        <div class="row"></div>
+        <div class="col-lg-3 col-md-3"></div>
+        <div class="col-md-6 col-lg-6 ">
+            <form action="/resource" method="POST" class="form ">
+                <div class="input-group">
+                    <input type="text" name="name" class="form-control" placeholder="Name">
+                    <span class="input-group-btn">
       </span>
-    </div>
-    <div class="input-group">
-      <input type="text" name="r_url" class="form-control" placeholder="URL">
-      <span class="input-group-btn">
+                </div>
+                <div class="input-group">
+                    <input type="text" name="r_url" class="form-control" placeholder="URL">
+                    <span class="input-group-btn">
       </span>
-    </div>
-    <div class="input-group">
-      <input type="text" name="desc" class="form-control" placeholder="Description">
-      <span class="input-group-btn">
+                </div>
+                <div class="input-group">
+                    <input type="text" name="desc" class="form-control" placeholder="Description">
+                    <span class="input-group-btn">
       </span>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="input-group">
+                            <input type="text" name="topic" class="form-control" value="<%=topic%>" style="display:none">
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="video"> Video
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="book" checked="true"> Book
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" value="blog"> Blog
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <hr>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="cert" value="1"> Certification Available
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="paid" value="1" checked="true"> Paid
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="paid" value="0"> Free
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-3"></div>
     </div>
-    <div class="row">
-    	<div class="col-lg-6 col-md-6">
-    		<div class="input-group">
-		      <input type="text" name="topic" class="form-control" value="<%=topic%>" style="display:none">
-		    </div>
-
-    		<div class="radio">
-				<label>
-					<input type="radio" name="type" value="video">
-					Video
-				</label>
-			</div>
-			<div class="radio">
-				<label>
-					<input type="radio" name="type" value="book" checked="true">
-					Book
-				</label>
-			</div>
-			<div class="radio">
-				<label>
-					<input type="radio" name="type" value="blog">
-					Blog
-				</label>
-			</div>
-    	</div>
-    	<div class="col-lg-6 col-md-6">
-    	<hr>
-    		<div class="checkbox">
-				<label>
-					<input type="checkbox" name="cert" value="1" >
-					Certification Available
-				</label>
-			</div>
-			<hr>
-    		<div class="radio">
-				<label>
-					<input type="radio" name="paid" value="1" checked="true">
-					Paid
-				</label>
-			</div>
-			<div class="radio">
-				<label>
-					<input type="radio" name="paid" value="0">
-					Free
-				</label>
-			</div>
-			
-    		
-    </div>
-	
-	<div>
-		
-			<input class="btn btn-primary" type="submit" value="Submit">
-
-	</div>
-
-	
-</div>
-</form>
-</div>
-<div class="col-lg-3 col-md-3"></div>
-
-</div>
-<%include partials/footer%>
+    <%include partials/footer%>
