@@ -26,7 +26,8 @@
     </nav>
     <div class="container">
         <h1>Resources for <%=data[0]["topic"]%></h1>
-        <p>Resource name<span class="pull-right"><a href="/resource/<%=data[0]["topic"]%>"><button class="btn btn-primary">Add a resource</button></a></span></p>
+        <a href="/resource/<%=data[0]["topic"]%>"><button class="pull-right btn btn-primary">Add a resource</button></a>
+       <hr>
         <hr>
         <hr>
     </div>
@@ -34,7 +35,7 @@
     <div class="container">
         <div class="card">
             <div class="row">
-                <a href="#resource_url">
+                <a href="<%=res["resource_url"]%>" target="_blank" >
                     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                         <h3><%=res["name"]%><br>
 	                        <small><%=res["description"]%><br><!--<small>submitted by Batman</small>-->
@@ -44,13 +45,13 @@
                 </a>
                 <div class="col-lg-1 col-md-1 col-sm-9 col-xs-9">
                 	<%if(res["type"]=="video"){%>
-                    	<i class="details fa fa-video-camera" aria-hidden="true"></i>
+                    	<i class="details fa fa-video-camera" data-toggle="tooltip" data-placement="top" title="video" aria-hidden="true"></i>
                     <%}%>
                     <%if(res["type"]=="book"){%>
-                    	<i class="details fa fa-book" aria-hidden="true"></i>
+                    	<i class="details fa fa-book" data-toggle="tooltip" data-placement="top" title="book" aria-hidden="true"></i>
                     <%}%>
                     <%if(res["type"]=="blog"){%>
-                    	<i class="details fa fa-rss-square" aria-hidden="true"></i>
+                    	<i class="details fa fa-rss-square" data-toggle="tooltip" data-placement="right" title="blog/guide" aria-hidden="true"></i>
                     <%}%>
                     <span class="details">
                     <%if(res["cost"]){%>
@@ -68,12 +69,12 @@
                 </div>
                 <div class="row vertical-align col-lg-2 col-md-2 col-sm-3 col-xs-3">
                     <div class="col-xs-6">
-                        <i id="thumb_up" class="material-icons">thumb_up</i>
-                        <i id="thumb_down" class="material-icons">thumb_down</i>
+                        <i id="tu<%=res["id_no"]%>"  class="thumb_up material-icons">thumb_up</i>
+                        <i id="td<%=res["id_no"]%>"  class="thumb_down material-icons">thumb_down</i>
                     </div>
                     <div class="col-xs-6">
                     	<%if(res["total_votes"]==null){res["total_votes"]=0}%>
-                        <span id="votes"><%=res["total_votes"]%></span>
+                        <span id="tv<%=res["id_no"]%>" class="votes"><%=res["total_votes"]%></span>
                     </div>
                 </div>
             </div>

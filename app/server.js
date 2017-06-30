@@ -221,7 +221,8 @@ app.post('/resource', function(req, res) {
                     user_id: headers['X-Hasura-User-Id'],
                     type: req.body.type,
                     certificate: certificate,
-                    cost: price
+                    cost: price,
+                    description: req.body.desc
                 }]
             }
         })
