@@ -238,7 +238,7 @@ app.get('/signup', function(req, res) {
     res.render('signup-page');
 });
 
-app.post('/signup', function(req, res) {
+/*app.post('/signup', function(req, res) {
     var newuser = req.body.user;
     var schemaFetchUrl = authurl + '/signup';
     var options = {
@@ -290,7 +290,7 @@ app.get('/login', function(req, res) {
     res.render('login');
 });
 
-/*app.post('/login', function(req, res) {
+app.post('/login', function(req, res) {
     var newuser = req.body.user;
     var schemaFetchUrl = authurl + '/login';
     var options = {
