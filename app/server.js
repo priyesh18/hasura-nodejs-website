@@ -100,9 +100,7 @@ app.use(bodyParser.urlencoded({
 //Vars
 var dataurl = "http://data.c100.hasura.me/v1/query";
 var authurl = "http://auth.c100.hasura.me";
-var headers = {
-    'Content-Type': 'application/json'
-};
+
 //Routes
 app.get('/', function(req, res) {
     res.redirect("/topics");
@@ -292,7 +290,7 @@ app.get('/login', function(req, res) {
     res.render('login');
 });
 
-app.post('/login', function(req, res) {
+/*app.post('/login', function(req, res) {
     var newuser = req.body.user;
     var schemaFetchUrl = authurl + '/login';
     var options = {
@@ -342,7 +340,7 @@ app.post('/logout', function(req, res) {
 
     res.redirect("/");
 
-});
+});*/
 
 
 app.listen(8080, function() {

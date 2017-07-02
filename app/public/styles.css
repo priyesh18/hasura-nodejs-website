@@ -83,7 +83,9 @@ a:hover {
     text-decoration: none;
     color: black;
 }
-
+#logout {
+    cursor: pointer;
+}
 .details {
     font-size: 2.6rem;
     cursor: help;
