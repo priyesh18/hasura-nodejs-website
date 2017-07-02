@@ -131,3 +131,6 @@ $('#logout').on('click', function () {
         console.log(error);
     })
 })
+
+
+//Insert a new resource into the table by the user
