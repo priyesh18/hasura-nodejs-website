@@ -28,7 +28,9 @@ $('#login_form').on('click', function(){
         data: JSON.stringify($user)
     }).done(function(data){
         console.log(data);
-        window.location="/";
+        user_id = data.hasura_id;
+        Cookies.set('id', user_id, { expires: 7 });
+        //window.location="/";
     }).fail(function(error){
         $('#login_form').attr("disabled", false);
         console.log(error);
@@ -56,6 +58,7 @@ function signup() {
 
 //logout
 $('#logout').on('click',function(){
+    $(this).attr("disabled", true);
     $.ajax({
         method: 'POST',
         //url: 'http://auth.c100.priyesh18.me/user/logout',
@@ -69,9 +72,10 @@ $('#logout').on('click',function(){
         
     }).done(function(data){
         console.log(data);
+        Cookies.remove('id');
         //window.location="/";
     }).fail(function(error){
-       // $('#login_form').attr("disabled", true);
+        $('#logout').attr("disabled", false);
         console.log(error);
     })
 })
