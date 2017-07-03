@@ -1,8 +1,10 @@
 $('[data-toggle="tooltip"]').tooltip();
 
 //Auth
-var auth_url = "http://auth.c100.hasura.me";
-var data_url = "http://data.c100.hasura.me";
+//var auth_url = "http://auth.c100.hasura.me";
+//var data_url = "http://data.c100.hasura.me";
+var auth_url = "http://auth.priyesh18.hasura.me";
+var data_url = "http://data.priyesh18.hasura.me";
 (Cookies.get('id') == undefined) ? $('#out').css("display", "none"): $('#out').css("display", "block");
 (Cookies.get('id') == undefined) ? $('#in').css("display", "block"): $('#in').css("display", "none");
 
@@ -20,8 +22,8 @@ $('#login_form').on('click', function () {
 
     $.ajax({
         method: 'POST',
-        //url: 'http://auth.priyesh18.hasura.me/login',
-        url: 'http://auth.c100.hasura.me/login',
+        
+        url: auth_url+'/login',
         xhrFields: {
             withCredentials: true
         },
@@ -57,7 +59,7 @@ $('#signup_form').on('click', function () {
     $.ajax({
         method: 'POST',
         //url: 'http://auth.priyesh18.hasura.me/signup',
-        url: 'http://auth.c100.hasura.me/signup',
+        url: auth_url+'/signup',
         xhrFields: {
             withCredentials: true
         },
@@ -83,8 +85,8 @@ $('#signup_form').on('click', function () {
         };
         $.ajax({
             method: 'POST',
-            //url: 'http://data.priyesh18.hasura.me/v1/query',
-            url: 'http://data.c100.hasura.me/v1/query',
+            
+            url: data_url+'/v1/query',
             xhrFields: {
                 withCredentials: true
             },
@@ -117,7 +119,7 @@ $('#logout').on('click', function () {
     $.ajax({
         method: 'POST',
         //url: 'http://auth.c100.priyesh18.me/user/logout',
-        url: 'http://auth.c100.hasura.me/user/logout',
+        url: auth_url+'/user/logout',
         xhrFields: {
             withCredentials: true
         },
@@ -162,7 +164,7 @@ $('#add_resource').on('click', function () {
     $.ajax({
         method: 'POST',
         //url: 'http://data.priyesh18.hasura.me/v1/query',
-        url: 'http://data.c100.hasura.me/v1/query',
+        url: data_url+'/v1/query',
         xhrFields: {
             withCredentials: true
         },

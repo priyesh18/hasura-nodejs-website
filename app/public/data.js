@@ -18,7 +18,7 @@ $("[id^=tu-]").on('click', function () {
     $.ajax({
         method: 'POST',
         //url: 'http://data.priyesh18.hasura.me/v1/query',
-        url: 'http://data.c100.hasura.me/v1/query',
+        url: data_url+'/v1/query',
         xhrFields: {
             withCredentials: true
         },
@@ -60,7 +60,7 @@ $("[id^=td-]").on('click', function () {
     $.ajax({
         method: 'POST',
         //url: 'http://data.priyesh18.hasura.me/v1/query',
-        url: 'http://data.c100.hasura.me/v1/query',
+        url: data_url+'/v1/query',
         xhrFields: {
             withCredentials: true
         },
@@ -102,7 +102,7 @@ function delete_vote(rurl) {
     $.ajax({
         method: 'POST',
         //url: 'http://data.priyesh18.hasura.me/v1/query',
-        url: 'http://data.c100.hasura.me/v1/query',
+        url: data_url+'/v1/query',
         xhrFields: {
             withCredentials: true
         },
@@ -138,7 +138,7 @@ function update(uurl){
     $.ajax({
         method: 'POST',
         //url: 'http://data.priyesh18.hasura.me/v1/query',
-        url: 'http://data.c100.hasura.me/v1/query',
+        url: data_url+'/v1/query',
         xhrFields: {
             withCredentials: true
         },
@@ -147,7 +147,7 @@ function update(uurl){
         },
         data: JSON.stringify($update)
     }).done(function (data) {
-        var x = JSON.stringify(data[0].total_votes);
+        var x = JSON.stringify(data[0].total_votes);   //data is an array with 1 element
         if(x=='null'){
             x='0';
         }
