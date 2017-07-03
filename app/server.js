@@ -115,7 +115,7 @@ app.get('/', function (req, res) {
 });
 app.get('/topics', function (req, res) {
     // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
-    console.log(req.cookies['id']);
+    //console.log(req.cookies['id']);
     var headers = {
         'Content-Type': 'application/json'
     };
@@ -127,7 +127,7 @@ app.get('/topics', function (req, res) {
             type: 'select',
             args: {
                 table: 'topic',
-                columns: ['*'],
+                columns: ['*']
 
             }
         })
@@ -198,7 +198,7 @@ app.get('/topics/:id', function (req, res) { //main page
             //console.log("response for /topics "+res);
             return res.json();
         }).then(function (json) {
-            console.log(json);
+           // console.log(json);
             res.render("resources", {
                 data: json
             });
@@ -212,7 +212,7 @@ app.get('/resource/:topic', function (req, res) {
         topic: req.params.topic
     });
 });
-app.post('/resource', function (req, res) {
+/*app.post('/resource', function (req, res) {
     var certificate = (req.body.cert == '1') ? true : false;
     var price = (req.body.paid == '1') ? true : false;
 
@@ -243,7 +243,7 @@ app.post('/resource', function (req, res) {
             console.log(json);
         })
     res.redirect("/");
-});
+});*/
 
 app.get('/signup', function (req, res) {
     res.render('signup-page');
