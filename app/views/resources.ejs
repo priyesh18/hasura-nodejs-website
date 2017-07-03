@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Engineering Assistant</a>
+                <a class="navbar-brand" href="/">Engineering Assistant</a>
             </div>
             <div class=" collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul id="in" class="nav navbar-nav">
@@ -67,12 +67,12 @@
                 </div>
                 <div class="row vertical-align col-lg-2 col-md-2 col-sm-3 col-xs-3">
                     <div class="col-xs-6">
-                        <i id="tu<%=res["id_no"]%>"  class="thumb_up material-icons">thumb_up</i>
-                        <i id="td<%=res["id_no"]%>"  class="thumb_down material-icons">thumb_down</i>
+                        <i id="tu-<%=res["resource_url"]%>"  class="thumb_up material-icons">thumb_up</i>
+                        <i id="td-<%=res["resource_url"]%>"  class="thumb_down material-icons">thumb_down</i>
                     </div>
                     <div class="col-xs-6">
                     	<%if(res["total_votes"]==null){res["total_votes"]=0}%>
-                        <span id="tv<%=res["id_no"]%>" class="votes"><%=res["total_votes"]%></span>
+                        <span id="tv-<%=res["resource_url"]%>" class="votes"><%=res["total_votes"]%></span>
                     </div>
                 </div>
             </div>

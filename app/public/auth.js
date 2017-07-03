@@ -3,13 +3,11 @@ $('[data-toggle="tooltip"]').tooltip();
 //Auth
 var auth_url = "http://auth.c100.hasura.me";
 var data_url = "http://data.c100.hasura.me";
-(Cookies.get('id')==undefined)?$('#out').css("display","none"):$('#out').css("display","block");
-(Cookies.get('id')==undefined)?$('#in').css("display","block"):$('#in').css("display","none");
+(Cookies.get('id') == undefined) ? $('#out').css("display", "none"): $('#out').css("display", "block");
+(Cookies.get('id') == undefined) ? $('#in').css("display", "block"): $('#in').css("display", "none");
 
 
-$("[id^=tu]").on('click',function () {
-    
-})
+
 //login
 $('#login_form').on('click', function () {
     $(this).attr("disabled", true);
@@ -37,7 +35,7 @@ $('#login_form').on('click', function () {
         Cookies.set('id', user_id, {
             expires: 7
         });
-        window.location="/";
+        window.location = "/";
     }).fail(function (error) {
         $('#login_form').attr("disabled", false);
         console.log(error);
@@ -98,7 +96,7 @@ $('#signup_form').on('click', function () {
             //console.log(data);
 
 
-            window.location="/";
+            window.location = "/";
         }).fail(function (error) {
             $('#signup_form').attr("disabled", false);
             console.log(error);
@@ -130,7 +128,7 @@ $('#logout').on('click', function () {
     }).done(function (data) {
         console.log(data);
         Cookies.remove('id');
-        window.location="/";
+        window.location = "/";
     }).fail(function (error) {
         $('#logout').attr("disabled", false);
         console.log(error);
@@ -139,47 +137,47 @@ $('#logout').on('click', function () {
 
 
 //Insert a new resource into the table by the user
-$('#add_resource').on('click', function(){
+$('#add_resource').on('click', function () {
     //$(this).attr("disabled", true);
-    var certificate = ($('[name="cert"]:checked').val()==1)? true : false;
-    var price = ($('[name="paid"]:checked').val()==1) ? true : false;
-    
+    var certificate = ($('[name="cert"]:checked').val() == 1) ? true : false;
+    var price = ($('[name="paid"]:checked').val() == 1) ? true : false;
+
     var $info = {
-            type: 'insert',
-            args: {
-                table: 'resource',
-                objects: [{
-                    resource_url: $('[name="r_url"]').val(),
-                    name: $('[name="name"]').val(),
-                    topic: $('[name="topic"]').val(),
-                    user_id: Cookies.get('id'),
-                    type: $('[name="type"]').val(),
-                    certificate: certificate,
-                    cost: price,
-                    description: $('[name="desc"]').val(),
+        type: 'insert',
+        args: {
+            table: 'resource',
+            objects: [{
+                resource_url: $('[name="r_url"]').val(),
+                name: $('[name="name"]').val(),
+                topic: $('[name="topic"]').val(),
+                user_id: Cookies.get('id'),
+                type: $('[name="type"]').val(),
+                certificate: certificate,
+                cost: price,
+                description: $('[name="desc"]').val(),
                 }]
-            }
         }
+    }
     //console.log(JSON.stringify($info));
     $.ajax({
-            method: 'POST',
-            //url: 'http://data.priyesh18.hasura.me/v1/query',
-            url: 'http://data.c100.hasura.me/v1/query',
-            xhrFields: {
-                withCredentials: true
-            },
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: JSON.stringify($info)
-        }).done(function (data) {
-            console.log(data);
+        method: 'POST',
+        //url: 'http://data.priyesh18.hasura.me/v1/query',
+        url: 'http://data.c100.hasura.me/v1/query',
+        xhrFields: {
+            withCredentials: true
+        },
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify($info)
+    }).done(function (data) {
+        console.log(data);
 
 
-            //window.location="/";
-        }).fail(function (error) {
-            $('#signup_form').attr("disabled", false);
-            console.log(error);
-            alert(JSON.parse(error.responseText).error);
-        })
+        //window.location="/";
+    }).fail(function (error) {
+        $('#signup_form').attr("disabled", false);
+        console.log(error);
+        alert(JSON.parse(error.responseText).error);
+    })
 })
