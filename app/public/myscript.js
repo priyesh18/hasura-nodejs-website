@@ -69,15 +69,15 @@ $('#signup_form').on('click', function () {
             expires: 7
         });
         var $profile = {
-                    type: 'insert',
-                    args: {
-                        table: 'profile',
-                        objects: [{
-                            'name': $usern.val(),
-                            'user_id': user_id
+            type: 'insert',
+            args: {
+                table: 'profile',
+                objects: [{
+                    'name': $usern.val(),
+                    'user_id': user_id
                         }]
-                    }
-                };
+            }
+        };
         $.ajax({
             method: 'POST',
             //url: 'http://data.priyesh18.hasura.me/v1/query',
@@ -91,7 +91,7 @@ $('#signup_form').on('click', function () {
             data: JSON.stringify($profile)
         }).done(function (data) {
             console.log(data);
-            
+
 
             //window.location="/";
         }).fail(function (error) {
