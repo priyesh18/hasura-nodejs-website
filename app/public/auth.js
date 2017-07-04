@@ -3,8 +3,8 @@ $('[data-toggle="tooltip"]').tooltip();
 //Auth
 //var auth_url = "http://auth.c100.hasura.me";
 //var data_url = "http://data.c100.hasura.me";
-var auth_url = "http://auth.priyesh18.hasura.me";
-var data_url = "http://data.priyesh18.hasura.me";
+var auth_url = "http://auth.priyesh.hasura.me";
+var data_url = "http://data.priyesh.hasura.me";
 (Cookies.get('id') == undefined) ? $('#out').css("display", "none"): $('#out').css("display", "block");
 (Cookies.get('id') == undefined) ? $('#in').css("display", "block"): $('#in').css("display", "none");
 
