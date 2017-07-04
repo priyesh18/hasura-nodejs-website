@@ -20,9 +20,10 @@ $('#login_form').on('mousedown touchstart', function () {
         username: $usern.val(),
         password: $pass.val()
     };
-
+    $.support.cors = true;
+    $.mobile.allowCrossDomainPages = true;
     $.ajax({
-        type: 'POST',
+        method: 'POST',
         
         url: auth_url+'/login',
         xhrFields: {
