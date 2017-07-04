@@ -29,6 +29,7 @@ $('#login_form').on('mousedown touchstart', function () {
         xhrFields: {
             withCredentials: true
         },
+        crossDomain: true,
         headers: {
             'Content-Type': 'application/json'
         },
