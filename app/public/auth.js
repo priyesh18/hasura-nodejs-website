@@ -21,7 +21,7 @@ $('#login_form').on('mousedown touchstart', function () {
         password: $pass.val()
     };
     $.support.cors = true;
-    $.mobile.allowCrossDomainPages = true;
+    
     $.ajax({
         method: 'POST',
         
