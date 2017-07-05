@@ -1,10 +1,10 @@
 $('[data-toggle="tooltip"]').tooltip();
 
 //Auth
-//var auth_url = "http://auth.c100.hasura.me";
-//var data_url = "http://data.c100.hasura.me";
-var auth_url = "http://auth.priyesh.hasura.me";
-var data_url = "http://data.priyesh.hasura.me";
+var auth_url = "http://auth.c100.hasura.me";
+var data_url = "http://data.c100.hasura.me";
+//var auth_url = "http://auth.priyesh.hasura.me";
+//var data_url = "http://data.priyesh.hasura.me";
 (Cookies.get('id') == undefined) ? $('#out').css("display", "none"): $('#out').css("display", "block");
 (Cookies.get('id') == undefined) ? $('#in').css("display", "block"): $('#in').css("display", "none");
 
@@ -13,6 +13,7 @@ var data_url = "http://data.priyesh.hasura.me";
 //login
 $('#login_form').on('mousedown touchstart', function () {
     //alert("clicked");
+    
     $(this).attr("disabled", true);
     var $usern = $('#username');
     var $pass = $('#password');
@@ -40,7 +41,7 @@ $('#login_form').on('mousedown touchstart', function () {
         Cookies.set('id', user_id, {
             expires: 7
         });
-        window.location = "/";
+        //window.location = "/";
     }).fail(function (error) {
         $('#login_form').attr("disabled", false);
         console.log(error);

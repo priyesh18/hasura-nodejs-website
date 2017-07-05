@@ -105,17 +105,18 @@ app.use(cookieParser());
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    var allowedOrigins = ['http://auth.priyesh.hasura.me', 'http://data.priyesh.hasura.me', 'http://auth.c100.hasura.me', 'http://data.c100.hasura.me'];
+    var allowedOrigins = ['http://auth.priyesh.hasura.me', 'http://data.priyesh.hasura.me', 'http://auth.c100.hasura.me', 'http://data.c100.hasura.me', ];
     var origin = req.headers.origin;
-  if(allowedOrigins.indexOf(origin) > -1){
-       res.setHeader('Access-Control-Allow-Origin', origin);
-  }
+    if (allowedOrigins.indexOf(origin) > -1) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, X-Hasura-Role, X-Hasura-Id");
+   /* res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, X-Hasura-User-Id, x-hasura-role');*/
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
@@ -137,7 +138,8 @@ app.get('/', function (req, res) {
 });
 app.get('/topics', function (req, res) {
     // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
-    //console.log(req.cookies['id']);
+    console.log(req.get('X-Hasura-Role'));
+    console.log(req.get('X-Hasura-User-Id'));
     var headers = {
         'Content-Type': 'application/json'
     };
@@ -188,11 +190,11 @@ app.get('/topics', function (req, res) {
     .catch((e) => {
         e.stackTrace();
         res.send('Error in fetching current schema: ' + e.toString());
-    });*/  // original fetch chain
+    });*/ // original fetch chain
 });
 //Second screen
 app.get('/topics/:id', function (req, res) { //main page 
-    
+
     var schemaFetchUrl = dataurl;
     var options = {
         method: 'POST',
@@ -220,7 +222,7 @@ app.get('/topics/:id', function (req, res) { //main page
             //console.log("response for /topics "+res);
             return res.json();
         }).then(function (json) {
-           // console.log(json);
+            // console.log(json);
             res.render("resources", {
                 data: json
             });
@@ -374,7 +376,7 @@ app.post('/logout', function(req, res) {
 
     res.redirect("/");
 
-});*/  //logout login and signup post routes
+});*/ //logout login and signup post routes
 
 
 app.listen(8080, function () {
