@@ -17,7 +17,7 @@ $("[id^=tu-]").on('click touchstart', function () {
     }
     $.ajax({
         method: 'POST',
-        url: data_url+'/v1/query',
+        url: data_url + '/v1/query',
         xhrFields: {
             withCredentials: true
         },
@@ -27,8 +27,11 @@ $("[id^=tu-]").on('click touchstart', function () {
         data: JSON.stringify($vote)
     }).done(function (data) {
         console.log(data);
+        toastr["success"]("Your vote is recorded")
+            toastr.options = {
+                "closeButton": true,}
         update(r_url);
-        
+
     }).fail(function (error) {
         if (error.status == 400) {
             delete_vote(r_url);
@@ -58,7 +61,7 @@ $("[id^=td-]").on('click touchstart', function () {
     $.ajax({
         method: 'POST',
         //url: 'http://data.priyesh18.hasura.me/v1/query',
-        url: data_url+'/v1/query',
+        url: data_url + '/v1/query',
         xhrFields: {
             withCredentials: true
         },
@@ -68,6 +71,9 @@ $("[id^=td-]").on('click touchstart', function () {
         data: JSON.stringify($vote)
     }).done(function (data) {
         console.log(data);
+        toastr["success"]("Your vote is recorded")
+            toastr.options = {
+                "closeButton": true,}
         update(r_url);
 
         //window.location = "/";
@@ -98,7 +104,7 @@ function delete_vote(rurl) {
     }
     $.ajax({
         method: 'POST',
-        url: data_url+'/v1/query',
+        url: data_url + '/v1/query',
         xhrFields: {
             withCredentials: true
         },
@@ -108,20 +114,25 @@ function delete_vote(rurl) {
         data: JSON.stringify($delete_original)
     }).done(function (data) {
         console.log(data);
+        toastr["error"]("Your vote was removed")
+            toastr.options = {
+                "closeButton": true,}
         update(rurl);
 
         //window.location = "/";
     }).fail(function (error) {
-        alert("You must Login");
-        console.log(error);
-        //alert(JSON.parse(error.responseText).message);
-    })
-}
+            toastr["warning"]("Please login to vote")
+            toastr.options = {
+                "closeButton": true,}
+                console.log(error);
+                //alert(JSON.parse(error.responseText).message);
+            })
+    }
 
-//update the total votes count
-function update(uurl){
-    //var id = 'tv-'+url;
-    var $update = {
+    //update the total votes count
+    function update(uurl) {
+        //var id = 'tv-'+url;
+        var $update = {
             type: 'select',
             args: {
                 table: 'resource_info',
@@ -131,29 +142,29 @@ function update(uurl){
                 }
             }
         }
-    $.ajax({
-        method: 'POST',
-        //url: 'http://data.priyesh18.hasura.me/v1/query',
-        url: data_url+'/v1/query',
-        xhrFields: {
-            withCredentials: true
-        },
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: JSON.stringify($update)
-    }).done(function (data) {
-        var x = JSON.stringify(data[0].total_votes);   //data is an array with 1 element
-        if(x=='null'){
-            x='0';
-        }
-        document.getElementById('tv-'+uurl).innerHTML=x;
-        //window.location = "/";
-    }).fail(function (error) {
+        $.ajax({
+            method: 'POST',
+            //url: 'http://data.priyesh18.hasura.me/v1/query',
+            url: data_url + '/v1/query',
+            xhrFields: {
+                withCredentials: true
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify($update)
+        }).done(function (data) {
+            var x = JSON.stringify(data[0].total_votes); //data is an array with 1 element
+            if (x == 'null') {
+                x = '0';
+            }
+            document.getElementById('tv-' + uurl).innerHTML = x;
+            //window.location = "/";
+        }).fail(function (error) {
 
-        console.log(error);
-        //alert(JSON.parse(error.responseText).message);
-    })
-    //console.log($id);
-    
-}
+            console.log(error);
+            //alert(JSON.parse(error.responseText).message);
+        })
+        //console.log($id);
+
+    }
