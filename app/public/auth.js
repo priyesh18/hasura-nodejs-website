@@ -30,7 +30,7 @@ $('#login_form').on('mousedown touchstart', function () {
         xhrFields: {
             withCredentials: true
         },
-       // crossDomain: true,
+       
         headers: {
             'Content-Type': 'application/json'
         },
@@ -41,7 +41,7 @@ $('#login_form').on('mousedown touchstart', function () {
         Cookies.set('id', user_id, {
             expires: 7
         });
-        //window.location = "/";
+        window.location = "/";
     }).fail(function (error) {
         $('#login_form').attr("disabled", false);
         console.log(error);
@@ -63,7 +63,6 @@ $('#signup_form').on('click touchstart', function () {
 
     $.ajax({
         method: 'POST',
-        //url: 'http://auth.priyesh18.hasura.me/signup',
         url: auth_url+'/signup',
         xhrFields: {
             withCredentials: true
@@ -109,7 +108,7 @@ $('#signup_form').on('click touchstart', function () {
             console.log(error);
             alert(JSON.parse(error.responseText).message);
         })
-        //window.location="/";
+        window.location="/";
     }).fail(function (error) {
         $('#signup_form').attr("disabled", false);
         console.log(error);
@@ -123,7 +122,6 @@ $('#logout').on('click touchstart', function () {
     $(this).attr("disabled", true);
     $.ajax({
         method: 'POST',
-        //url: 'http://auth.c100.priyesh18.me/user/logout',
         url: auth_url+'/user/logout',
         xhrFields: {
             withCredentials: true
@@ -145,7 +143,7 @@ $('#logout').on('click touchstart', function () {
 
 //Insert a new resource into the table by the user
 $('#add_resource').on('click touchstart', function () {
-    //$(this).attr("disabled", true);
+    $(this).attr("disabled", true);
     var certificate = ($('[name="cert"]:checked').val() == 1) ? true : false;
     var price = ($('[name="paid"]:checked').val() == 1) ? true : false;
 
@@ -168,7 +166,6 @@ $('#add_resource').on('click touchstart', function () {
     //console.log(JSON.stringify($info));
     $.ajax({
         method: 'POST',
-        //url: 'http://data.priyesh18.hasura.me/v1/query',
         url: data_url+'/v1/query',
         xhrFields: {
             withCredentials: true
@@ -181,7 +178,7 @@ $('#add_resource').on('click touchstart', function () {
         console.log(data);
 
 
-        //window.location="/";
+        window.location="/";
     }).fail(function (error) {
         $('#signup_form').attr("disabled", false);
         console.log(error);

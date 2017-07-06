@@ -138,8 +138,8 @@ app.get('/', function (req, res) {
 });
 app.get('/topics', function (req, res) {
     // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
-    console.log(req.get('X-Hasura-Role'));
-    console.log(req.get('X-Hasura-User-Id'));
+    //console.log(req.header('X-Hasura-Role'));
+    //console.log(req.get('X-Hasura-User-Id'));
     var headers = {
         'Content-Type': 'application/json'
     };
@@ -222,10 +222,16 @@ app.get('/topics/:id', function (req, res) { //main page
             //console.log("response for /topics "+res);
             return res.json();
         }).then(function (json) {
-            // console.log(json);
-            res.render("resources", {
+            if(json.length==0){
+               res.render("no_res", {
+                data: req.params.id
+            }); 
+            }
+            else{
+                res.render("resources", {
                 data: json
             });
+            }
         });
 
 });

@@ -1,0 +1,35 @@
+<%include partials/header%>
+    <div class="jumbotron"></div>
+    <nav class="navbar navbar-fixed-top nav-white" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Engineering Assistant</a>
+            </div>
+            <div class=" collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul id="in" class="nav navbar-nav">
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/signup">Signup</a></li>
+                </ul>
+                    <ul id="out" class="nav navbar-nav">
+                    <li class="active" id="logout"><a>logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>No resources found for <%=data%></h1>
+        <a href="/resource/<%=data%>" ><i class="details fa fa-hand-o-right" aria-hidden="true"></i>
+<button class=" btn btn-primary">Add a resource</button></a>
+     
+    </div>
+    
+
+
+
+        <%include partials/footer%>
