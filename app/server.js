@@ -94,7 +94,7 @@ app.listen(8080, function () {
 */
 var express = require("express"),
     bodyParser = require("body-parser"), //get the params from the request body not used in this app now since all requests are moved to the client side
-    cookieParser = require('cookie-parser'),
+    cookieParser = require('cookie-parser'), //I won't need this package also since i can find out if i have a cookie or not from headers
     app = express(),
     fetch = require('node-fetch');
 
@@ -137,9 +137,8 @@ app.get('/', function (req, res) {
     res.redirect("/topics");
 });
 app.get('/topics', function (req, res) {
-    // headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
-    //console.log(req.header('X-Hasura-Role'));
-    //console.log(req.get('X-Hasura-User-Id'));
+   // console.log(req.header('cookie'));
+    //console.log(req.get('X-Hasura-User-Id')); //This should have worked but it is not working.
     var headers = {
         'Content-Type': 'application/json'
     };
@@ -237,7 +236,7 @@ app.get('/topics/:id', function (req, res) { //main page
 });
 
 
-app.get('/resource/:topic', function (req, res) {
+app.get('/resource/:topic',isLoggedIn, function (req, res) {
     res.render('resourceform', {
         topic: req.params.topic
     });
@@ -275,13 +274,27 @@ app.get('/resource/:topic', function (req, res) {
     res.redirect("/");
 });*/
 
-app.get('/signup', function (req, res) {
+app.get('/signup',alreadyLoggedIn, function (req, res) {
     res.render('signup-page');
 });
 
-app.get('/login', function (req, res) {
+app.get('/login',alreadyLoggedIn, function (req, res) {
     res.render('login');
 });
+
+//middleware
+function alreadyLoggedIn(req, res, next){
+    if(req.header('cookie')==undefined){
+        return next();
+    }
+    res.redirect("/");
+}
+function isLoggedIn(req,res, next){
+    if(req.header('cookie')!=undefined){
+        return next();
+    }
+    res.redirect("/login");
+}
 /*app.post('/signup', function(req, res) {
     var newuser = req.body.user;
     var schemaFetchUrl = authurl + '/signup';

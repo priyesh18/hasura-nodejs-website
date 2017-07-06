@@ -17,7 +17,6 @@ $("[id^=tu-]").on('click touchstart', function () {
     }
     $.ajax({
         method: 'POST',
-        //url: 'http://data.priyesh18.hasura.me/v1/query',
         url: data_url+'/v1/query',
         xhrFields: {
             withCredentials: true
@@ -29,8 +28,7 @@ $("[id^=tu-]").on('click touchstart', function () {
     }).done(function (data) {
         console.log(data);
         update(r_url);
-
-        //window.location = "/";
+        
     }).fail(function (error) {
         if (error.status == 400) {
             delete_vote(r_url);
@@ -86,7 +84,6 @@ $("[id^=td-]").on('click touchstart', function () {
 
 //delete vote function
 function delete_vote(rurl) {
-    //console.log(rurl+ " inside function");
     var $delete_original = {
         type: 'delete',
         args: {
@@ -101,7 +98,6 @@ function delete_vote(rurl) {
     }
     $.ajax({
         method: 'POST',
-        //url: 'http://data.priyesh18.hasura.me/v1/query',
         url: data_url+'/v1/query',
         xhrFields: {
             withCredentials: true
@@ -116,7 +112,7 @@ function delete_vote(rurl) {
 
         //window.location = "/";
     }).fail(function (error) {
-
+        alert("You must Login");
         console.log(error);
         //alert(JSON.parse(error.responseText).message);
     })
