@@ -67,8 +67,8 @@
                 </div>
                 <div class="row vertical-align col-lg-2 col-md-2 col-sm-3 col-xs-3">
                     <div class="col-xs-6">
-                        <i id="tu-<%=res["resource_url"]%>"  class="thumb_up material-icons">thumb_up</i>
-                        <i id="td-<%=res["resource_url"]%>"  class="thumb_down material-icons">thumb_down</i>
+                        <i id="tu-<%=res["resource_url"]%>"  class="thumb_up material-icons" aria-hidden="true">thumb_up</i>
+                        <i id="td-<%=res["resource_url"]%>"  class="thumb_down material-icons" aria-hidden="true">thumb_down</i>
                     </div>
                     <div class="col-xs-6">
                     	<%if(res["total_votes"]==null){res["total_votes"]=0}%>
