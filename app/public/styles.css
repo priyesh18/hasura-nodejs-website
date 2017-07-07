@@ -102,6 +102,7 @@ a:hover {
     cursor: pointer;
     vertical-align: middle;
     font-size: 3.3rem;
+    user-select:none;
 }
 
 .vertical-align {
