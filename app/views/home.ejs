@@ -1,4 +1,15 @@
 <%include partials/header%>
+    <style>
+        body {
+            background-image: url('../assets/img/robot.jpg');
+            background-size: cover;
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin-top: 10rem;
+        }
+
+    </style>
     <nav class="navbar navbar-fixed-top nav-white" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -8,20 +19,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Engineering Assistant</a>
+                <a class="navbar-brand" href="/">Engineering Assistant</a>
             </div>
             <div class=" collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul id="in" class="nav navbar-nav">
                     <li><a href="/login">Login</a></li>
                     <li><a href="/signup">Signup</a></li>
                 </ul>
-                    <ul id="out" class="nav navbar-nav">
+                <ul id="out" class="nav navbar-nav">
                     <li class="active" id="logout"><a>logout</a></li>
                 </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group label-floating">
+                        <label class="control-label">Search...</label>
+                        <input type="email" class="form-control">
+                    </div>
+                </form>
             </div>
         </div>
     </nav>
-    <div class="jumbotron"></div>
     <div class="container">
         <div class="input-group ">
             <input type="text" class="form-control" placeholder="Search for...">
@@ -36,7 +52,7 @@
             <div class="col-lg-8 col-md-8 col-sm-12">
                 <ul class="list-group">
                     <% data.forEach(function(topics) { %>
-                        <a href="/topics/<%=topics["topic_name"]%>">
+                        <a href="/topics/<%=topics[" topic_name "]%>">
                             <li class="card list-group-item main-topic">
                                 <%= topics["topic_name"]%>
                             </li>
@@ -47,4 +63,5 @@
             <div class="col-lg-2 col-md-2 col-sm-0"></div>
         </div>
     </div>
+
     <%include partials/footer%>

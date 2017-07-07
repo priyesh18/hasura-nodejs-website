@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
                         <div class="card card-signup">
-                            <form class="form">
+                            <form class="form" onsubmit="return login()">
                                 <div class="header header-primary text-center">
                                     <h4>Login</h4>
                                     <div class="social-line">
@@ -54,7 +54,7 @@
                                         <span class="input-group-addon">
 											<i class="material-icons">face</i>
 										</span>
-                                        <input required="true" id="username" type="text" class="form-control" placeholder="Username...">
+                                        <input required="true" id="username" autofocus type="text" class="form-control" placeholder="Username...">
                                     </div>
                                     <!--<div class="input-group">
 										<span class="input-group-addon">
@@ -69,11 +69,14 @@
                                         <input required="true" id="password" type="password" placeholder="Password..." class="form-control" />
                                     </div>
                                 </div>
+                                <div class="footer text-center">
+                                <input type="submit" id="login_form" class=" btn btn-primary" >
+                            </div>
 
                             </form>
-                            <div class="footer text-center">
+                            <!--<div class="footer text-center">
                                 <button id="login_form" class=" btn btn-primary ">get back in</button>
-                            </div>
+                            </div>-->
                             <div class="text-center">
                                 <a href="/signup">or signup</a> 
 

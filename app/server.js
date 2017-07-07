@@ -150,8 +150,12 @@ app.get('/topics', function (req, res) {
             type: 'select',
             args: {
                 table: 'topic',
-                columns: ['*']
+                columns: ['*'],
+                order_by: {
+                    column: 'topic_name',
+                    order: 'asc'
 
+                }
             }
         })
     };

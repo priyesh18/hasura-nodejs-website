@@ -54,7 +54,7 @@
                                         <span class="input-group-addon">
 											<i class="material-icons">face</i>
 										</span>
-                                        <input required="true" id="username"  type="text" class="form-control" placeholder="Username...">
+                                        <input required="true" id="username" autofocus  type="text" class="form-control" placeholder="Username...">
                                     </div>
                                     <div class="input-group">
 										<span class="input-group-addon">
@@ -66,14 +66,16 @@
                                         <span class="input-group-addon">
 											<i class="material-icons">lock_outline</i>
 										</span>
-                                        <input required="true" id="password"  type="password" placeholder="Password..." class="form-control" />
+                                        <input required="true" id="password" min="8"  type="password" placeholder="Password..." class="form-control" />
                                     </div>
                                 </div>
-                                
-                                </form>
-                            <div class="footer text-center">
-                                <button id="signup_form" class=" btn btn-primary" >get started</button>
+                                <div class="footer text-center">
+                                <input type="submit" id="signup_form" class=" btn btn-primary" >get started/>
                             </div>
+                                </form>
+                            <!--<div class="footer text-center">
+                                <button id="signup_form" class=" btn btn-primary" >get started</button>
+                            </div>-->
                           <div class="text-center">
                                 <a href="/login">or login</a> 
 
