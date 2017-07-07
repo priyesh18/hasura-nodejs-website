@@ -23,7 +23,7 @@
         </div>
     </nav>
     <div class="container">
-        <h1>Resources for <%=data[0]["topic"]%></h1>
+        <h1 class="heading">Resources for <%=data[0]["topic"]%></h1>
         <a href="/resource/<%=data[0]["topic"]%>"><button class="pull-right btn btn-primary">Add a resource</button></a>
        <hr>
         <hr>
@@ -43,13 +43,13 @@
                 </a>
                 <div class="col-lg-1 col-md-1 col-sm-9 col-xs-9">
                 	<%if(res["type"]=="video"){%>
-                    	<i class="details fa fa-video-camera" data-toggle="tooltip" data-placement="top" title="video" aria-hidden="true"></i>
+                    <font color="blue"><i class="details fa fa-video-camera" data-toggle="tooltip" data-placement="top" title="video" aria-hidden="true"></i></font>
                     <%}%>
                     <%if(res["type"]=="book"){%>
-                    	<i class="details fa fa-book" data-toggle="tooltip" data-placement="top" title="book" aria-hidden="true"></i>
+                    <font color="indigo"><i class="details fa fa-book" data-toggle="tooltip" data-placement="top" title="book" aria-hidden="true"></i></font>
                     <%}%>
                     <%if(res["type"]=="blog"){%>
-                    	<i class="details fa fa-rss-square" data-toggle="tooltip" data-placement="right" title="blog/guide" aria-hidden="true"></i>
+                    	<font color="orange"><i class="details fa fa-rss-square" data-toggle="tooltip" data-placement="right" title="blog/guide" aria-hidden="true"></i></font>
                     <%}%>
                     <span class="details">
                     <%if(res["cost"]){%>

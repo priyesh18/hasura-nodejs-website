@@ -47,7 +47,25 @@ h1 {
 
 h3 {
     font-size: 2.5rem;
-    line-height: 1.6rem;
+    line-height: 1.9rem;
+}
+
+.back-img {
+    background-image: url('assets/img/robot.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    display: block;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    height: 800px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.heading {
+    font-family: 'Nova Mono', monospace;
 }
 
 .main-topic {
@@ -60,7 +78,7 @@ h3 {
     color: black;
 }
 
-.navbar-nav > .active {
+.navbar-nav>.active {
     background-color: #55007F;
     border-radius: 4px;
     color: #FFFFFF;
@@ -83,9 +101,11 @@ a:hover {
     text-decoration: none;
     color: black;
 }
+
 #logout {
     cursor: pointer;
 }
+
 .details {
     font-size: 2.6rem;
     cursor: help;
@@ -93,7 +113,7 @@ a:hover {
 
 .container>.card {
     margin-bottom: 1rem;
-    padding: 0.5rem;
+    padding: 0.4rem;
 }
 
 .thumb_up,
@@ -102,7 +122,7 @@ a:hover {
     cursor: pointer;
     vertical-align: middle;
     font-size: 3.3rem;
-    user-select:none;
+    user-select: none;
 }
 
 .vertical-align {

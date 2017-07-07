@@ -1,16 +1,16 @@
 <%include partials/header%>
     <style>
         body {
-            background-image: url('../assets/img/robot.jpg');
+            background: url('assets/img/robo.jpeg');
             background-size: cover;
-            background-position: top center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            margin-top: 10rem;
+            background-position:center;
+            background-attachment:fixed;
+            margin-top: 5.8rem;
         }
 
     </style>
-    <nav class="navbar navbar-fixed-top nav-white" role="navigation">
+    
+    <nav class="navbar navbar-fixed-top navbar-transparent" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -22,29 +22,35 @@
                 <a class="navbar-brand" href="/">Engineering Assistant</a>
             </div>
             <div class=" collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul id="in" class="nav navbar-nav">
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/signup">Signup</a></li>
+                <ul id="in" class=" pull-right nav navbar-nav">
+                    <li class="active"><a href="/login">Login</a></li>
+                    <li>&nbsp;</li>
+                    <li class="active"><a href="/signup">Signup</a></li>
                 </ul>
-                <ul id="out" class="nav navbar-nav">
+                <ul id="out" class="pull-right nav navbar-nav">
                     <li class="active" id="logout"><a>logout</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
-                    <div class="form-group label-floating">
+                    <!--<div class="form-group label-floating">
                         <label class="control-label">Search...</label>
                         <input type="email" class="form-control">
-                    </div>
+                    </div>-->
                 </form>
             </div>
         </div>
     </nav>
+    <div class="text-center container">
+    <h1 class="heading">Engineering Assistant.<br>&nbsp;beyond academics...</h1>
+       <hr>
+        <h3 class="heading">Find and list the best resources <br>to learn the following topics</h3>
+    </div>
     <div class="container">
-        <div class="input-group ">
+        <!--<div class="input-group ">
             <input id="search" type="text" class="form-control" placeholder="Search for...">
             <span class="input-group-btn">
         <button class="btn btn-default" type="button">Go!</button>
       </span>
-        </div>
+        </div>-->
     </div>
     <div class="container">
         <div class="row">

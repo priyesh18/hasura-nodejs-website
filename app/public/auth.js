@@ -1,10 +1,10 @@
 $('[data-toggle="tooltip"]').tooltip();
 
 //Auth
-//var auth_url = "http://auth.c100.hasura.me";
-//var data_url = "http://data.c100.hasura.me";
-var auth_url = "http://auth.priyesh.hasura.me";
-var data_url = "http://data.priyesh.hasura.me";
+var auth_url = "http://auth.c100.hasura.me";
+var data_url = "http://data.c100.hasura.me";
+//var auth_url = "http://auth.priyesh.hasura.me";
+//var data_url = "http://data.priyesh.hasura.me";
 (Cookies.get('id') == undefined) ? $('#out').css("display", "none"): $('#out').css("display", "block");
 (Cookies.get('id') == undefined) ? $('#in').css("display", "block"): $('#in').css("display", "none");
 
@@ -43,9 +43,13 @@ $('#login_form').on('mousedown touchstart', function () {
         });
         window.location = "/";
     }).fail(function (error) {
+        toastr["success"]("Your vote is recorded")
+            toastr.options = {
+                "closeButton": true,}
         $('#login_form').attr("disabled", false);
         console.log(error);
-        alert(JSON.parse(error.responseText).message);
+        console.log((JSON.parse(error.responseText).message).toString());
+       // alert(JSON.parse(error.responseText).message);
     })
 })
 //signup
