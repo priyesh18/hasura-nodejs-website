@@ -119,7 +119,7 @@ a:hover {
 .thumb_up,
 .thumb_down,
 .votes {
-    cursor: pointer;
+   /* cursor: pointer;*/
     vertical-align: middle;
     font-size: 3.3rem;
     
