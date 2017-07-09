@@ -1,5 +1,5 @@
 //upvote
-$("[id^=tu-]").on('click touchstart', function () {
+$("[id^=tu-]").on('click', function () {
     var str = $(this).attr("id");
     var r_url = str.slice(3);
     var $vote = {
@@ -42,7 +42,7 @@ $("[id^=tu-]").on('click touchstart', function () {
 
 })
 //down vote
-$("[id^=td-]").on('click touchstart', function () {
+$("[id^=td-]").on('click', function () {
     var str = $(this).attr("id");
     var r_url = str.slice(3);
     var $vote = {
