@@ -169,7 +169,7 @@ $('#logout').on('click touchstart', function () {
 
 
 //Insert a new resource into the table by the user
-$('#add_resource').on('click touchstart', function () {
+$('#add_resource').on('click', function () {
     $(this).attr("disabled", true);
     var certificate = ($('[name="cert"]:checked').val() == 1) ? true : false;
     var price = ($('[name="paid"]:checked').val() == 1) ? true : false;
@@ -183,7 +183,7 @@ $('#add_resource').on('click touchstart', function () {
                 name: $('[name="name"]').val(),
                 topic: $('[name="topic"]').val(),
                 user_id: Cookies.get('id'),
-                type: $('[name="type"]').val(),
+                type: $('[name="type"]:checked').val(),
                 certificate: certificate,
                 cost: price,
                 description: $('[name="desc"]').val(),
