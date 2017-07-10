@@ -116,7 +116,7 @@ app.use(function (req, res, next) {
 
     // Request headers you wish to allow
     res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, X-Hasura-Role, X-Hasura-Id");
-   /* res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, X-Hasura-User-Id, x-hasura-role');*/
+    /* res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, X-Hasura-User-Id, x-hasura-role');*/
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
@@ -137,7 +137,7 @@ app.get('/', function (req, res) {
     res.redirect("/topics");
 });
 app.get('/topics', function (req, res) {
-   // console.log(req.header('cookie'));
+    // console.log(req.header('cookie'));
     //console.log(req.get('X-Hasura-User-Id')); //This should have worked but it is not working.
     var headers = {
         'Content-Type': 'application/json'
@@ -212,7 +212,11 @@ app.get('/topics/:id', function (req, res) { //main page
                 where: {
                     topic: req.params.id
                 },
-                order_by: "-total_votes"
+                order_by: {
+                    column: "total_votes",
+                    order: "desc",
+                    nulls: "last"
+                }
             }
         })
     };
@@ -221,22 +225,21 @@ app.get('/topics/:id', function (req, res) { //main page
             //console.log("response for /topics "+res);
             return res.json();
         }).then(function (json) {
-            if(json.length==0){
-               res.render("no_res", {
-                data: req.params.id
-            }); 
-            }
-            else{
+            if (json.length == 0) {
+                res.render("no_res", {
+                    data: req.params.id
+                });
+            } else {
                 res.render("resources", {
-                data: json
-            });
+                    data: json
+                });
             }
         });
 
 });
 
 
-app.get('/resource/:topic',isLoggedIn, function (req, res) {
+app.get('/resource/:topic', isLoggedIn, function (req, res) {
     res.render('resourceform', {
         topic: req.params.topic
     });
@@ -274,23 +277,24 @@ app.get('/resource/:topic',isLoggedIn, function (req, res) {
     res.redirect("/");
 });*/
 
-app.get('/signup',alreadyLoggedIn, function (req, res) {
+app.get('/signup', alreadyLoggedIn, function (req, res) {
     res.render('signup-page');
 });
 
-app.get('/login',alreadyLoggedIn, function (req, res) {
+app.get('/login', alreadyLoggedIn, function (req, res) {
     res.render('login');
 });
 
 //middleware
-function alreadyLoggedIn(req, res, next){
-    if(req.header('cookie')==undefined){
+function alreadyLoggedIn(req, res, next) {
+    if (req.header('cookie') == undefined) {
         return next();
     }
     res.redirect("/");
 }
-function isLoggedIn(req,res, next){
-    if(req.header('cookie')!=undefined){
+
+function isLoggedIn(req, res, next) {
+    if (req.header('cookie') != undefined) {
         return next();
     }
     res.redirect("/login");
