@@ -212,7 +212,7 @@ app.get('/topics/:id', function (req, res) { //main page
                 where: {
                     topic: req.params.id
                 },
-                order_by: "total_votes"
+                order_by: "-total_votes"
             }
         })
     };
