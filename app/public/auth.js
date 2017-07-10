@@ -156,6 +156,10 @@ $('#logout').on('click touchstart', function () {
     }).done(function (data) {
         console.log(data);
         Cookies.remove('id');
+        toastr["success"]("Logged out")
+        toastr.options = {
+            "closeButton": true,
+        }
         window.location = "/";
     }).fail(function (error) {
         $('#logout').attr("disabled", false);
@@ -202,10 +206,7 @@ $('#add_resource').on('click touchstart', function () {
 
 
         window.location = "/";
-        toastr["success"]("Logged out")
-        toastr.options = {
-            "closeButton": true,
-        }
+        
     }).fail(function (error) {
         $('#signup_form').attr("disabled", false);
         console.log(error);
