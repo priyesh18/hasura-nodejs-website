@@ -11,9 +11,9 @@ var data_url = "http://data.priyesh.hasura.me";
 
 
 //login
-$('#login_form').on('mousedown touchstart', function () {
+$('#login_form').on('click', function () {
     //alert("clicked");
-    
+
     $(this).attr("disabled", true);
     var $usern = $('#username');
     var $pass = $('#password');
@@ -21,35 +21,44 @@ $('#login_form').on('mousedown touchstart', function () {
         username: $usern.val(),
         password: $pass.val()
     };
-  
-    
+
+
     $.ajax({
         method: 'POST',
-        
-        url: auth_url+'/login',
+
+        url: auth_url + '/login',
         xhrFields: {
             withCredentials: true
         },
-       
+
         headers: {
             'Content-Type': 'application/json'
         },
         data: JSON.stringify($user)
     }).done(function (data) {
         //console.log(data);
+        //var mes = (JSON.parse(error.responseText).message).toString();
+        
         user_id = data.hasura_id;
         Cookies.set('id', user_id, {
             expires: 7
         });
         window.location = "/";
+        toastr["success"]("Login successful")
+        toastr.options = {
+            "closeButton": true,
+        }
     }).fail(function (error) {
-        toastr["success"]("Your vote is recorded")
-            toastr.options = {
-                "closeButton": true,}
+
         $('#login_form').attr("disabled", false);
-        console.log(error);
-        console.log((JSON.parse(error.responseText).message).toString());
-       // alert(JSON.parse(error.responseText).message);
+        // console.log(error);
+
+        var mes = (JSON.parse(error.responseText).message).toString();
+        toastr["error"](mes)
+        toastr.options = {
+            "closeButton": true,
+        }
+        // alert(JSON.parse(error.responseText).message);
     })
 })
 //signup
@@ -67,7 +76,7 @@ $('#signup_form').on('click touchstart', function () {
 
     $.ajax({
         method: 'POST',
-        url: auth_url+'/signup',
+        url: auth_url + '/signup',
         xhrFields: {
             withCredentials: true
         },
@@ -76,6 +85,10 @@ $('#signup_form').on('click touchstart', function () {
         },
         data: JSON.stringify($user)
     }).done(function (data) {
+        toastr["success"]("Signup successful")
+        toastr.options = {
+            "closeButton": true,
+        }
         console.log(data);
         user_id = data.hasura_id;
         Cookies.set('id', user_id, {
@@ -93,8 +106,8 @@ $('#signup_form').on('click touchstart', function () {
         };
         $.ajax({
             method: 'POST',
-            
-            url: data_url+'/v1/query',
+
+            url: data_url + '/v1/query',
             xhrFields: {
                 withCredentials: true
             },
@@ -110,13 +123,19 @@ $('#signup_form').on('click touchstart', function () {
         }).fail(function (error) {
             $('#signup_form').attr("disabled", false);
             console.log(error);
-            alert(JSON.parse(error.responseText).message);
+            //alert(JSON.parse(error.responseText).message);
+            
         })
-        window.location="/";
+        window.location = "/";
     }).fail(function (error) {
         $('#signup_form').attr("disabled", false);
+         var mes = (JSON.parse(error.responseText).message).toString();
+        toastr["error"](mes)
+        toastr.options = {
+            "closeButton": true,
+        }
         console.log(error);
-        alert(JSON.parse(error.responseText).message);
+       // alert(JSON.parse(error.responseText).message);
     })
 })
 
@@ -126,7 +145,7 @@ $('#logout').on('click touchstart', function () {
     $(this).attr("disabled", true);
     $.ajax({
         method: 'POST',
-        url: auth_url+'/user/logout',
+        url: auth_url + '/user/logout',
         xhrFields: {
             withCredentials: true
         },
@@ -170,7 +189,7 @@ $('#add_resource').on('click touchstart', function () {
     //console.log(JSON.stringify($info));
     $.ajax({
         method: 'POST',
-        url: data_url+'/v1/query',
+        url: data_url + '/v1/query',
         xhrFields: {
             withCredentials: true
         },
@@ -182,7 +201,11 @@ $('#add_resource').on('click touchstart', function () {
         console.log(data);
 
 
-        window.location="/";
+        window.location = "/";
+        toastr["success"]("Logged out")
+        toastr.options = {
+            "closeButton": true,
+        }
     }).fail(function (error) {
         $('#signup_form').attr("disabled", false);
         console.log(error);
