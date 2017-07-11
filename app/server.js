@@ -214,7 +214,7 @@ app.get('/topics/:id', function (req, res) { //main page
                 },
                 order_by: {
                     column: "total_votes",
-                    order: "desc",
+                    order: "asc",
                     nulls: "last"
                 }
             }
